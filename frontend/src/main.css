@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* #FFFFFF */
+    --foreground: 0 0% 20%; /* #333333 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    --primary: 212 71% 59%; /* #4A90E2 */
+    --primary-hover: 212 55% 44%; /* #357ABD */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 168 76% 60%; /* #50E3C2 */
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 210 17% 98%; /* #F8F9FA */
+    --muted-foreground: 0 0% 40%; /* #666666 */
+
+    --accent: 210 17% 98%;
+    --accent-foreground: 0 0% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 88%; /* #E0E0E0 */
+    --input: 0 0% 88%;
+    --ring: 212 71% 59%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 212 71% 59%;
+    --primary-hover: 212 55% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 168 76% 60%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 212 71% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-behavior-smooth;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .flashcard {
+    transform-style: preserve-3d;
+  }
+
+  .flashcard.is-flipped {
+    transform: rotateY(180deg);
+  }
+
+  .flashcard-face,
+  .flashcard-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Safari */
+  }
+
+  .flashcard-back {
+    transform: rotateY(180deg);
+  }
+}
+
+@layer utilities {
+  .scroll-behavior-smooth {
+    scroll-behavior: smooth;
+  }
+}

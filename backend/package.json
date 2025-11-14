@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test-server": "node src/test-server.js",
+    "db:init": "node scripts/db-init.js init",
+    "db:cleanup": "node scripts/db-init.js cleanup",
+    "db:help": "node scripts/db-init.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.3",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "pdf-parse": "^1.1.1",
+    "csv-parser": "^3.0.0",
+    "multer": "^1.4.5-lts.1",
+    "youtube-transcript": "^1.0.6",
+    "@google/generative-ai": "^0.12.0",
+    "groq-sdk": "^0.3.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "joi": "^17.11.0",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0"
+  }
+}
