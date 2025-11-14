@@ -439,10 +439,10 @@ export class AuthController {
   static async updateAgentContext(req, res) {
     try {
       const contextSchema = Joi.object({
-        systemPrompt: Joi.string().max(2000),
+        systemPrompt: Joi.string().allow('').max(2000),
         personality: Joi.string().valid('formal', 'casual', 'friendly', 'professional'),
         expertise: Joi.array().items(Joi.string().max(50)).max(10),
-        customInstructions: Joi.string().max(1000)
+        customInstructions: Joi.string().allow('').max(1000)
       });
 
       const { error, value } = contextSchema.validate(req.body);

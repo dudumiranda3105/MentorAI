@@ -40,8 +40,12 @@ export const agentContextAPI = {
     })
 
     if (!response.ok) {
-      const error = await response.json()
-      throw new Error(error.error || 'Falha ao atualizar contexto do agente')
+      let message = 'Falha ao atualizar contexto do agente'
+      try {
+        const error = await response.json()
+        message = error.details || error.error || message
+      } catch {}
+      throw new Error(message)
     }
 
     const data = await response.json()

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Menu, Settings, LogOut, Info, DollarSign, FolderOpen, Brain, Bot, Sparkles } from 'lucide-react'
+import { Menu, Settings, LogOut, Info, DollarSign, FolderOpen, Brain, Bot, Sparkles, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -16,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/contexts/AuthContext'
 
@@ -125,11 +125,9 @@ export const Header = () => {
                   className="relative h-10 w-10 rounded-full hover:ring-2 hover:ring-purple-500 transition-all"
                 >
                   <Avatar className="h-10 w-10">
-                    <AvatarImage
-                      src={`https://img.usecurling.com/ppl/medium?seed=${user.email}`}
-                      alt={user.name}
-                    />
-                    <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+                    <AvatarFallback className="bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-600 text-white font-bold">
+                      {getInitials(user.name)}
+                    </AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
@@ -144,6 +142,13 @@ export const Header = () => {
                     </p>
                   </div>
                 </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => handleNavigate('/app/profile')}
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Meu Perfil</span>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
                   onClick={() => handleNavigate('/app/settings')}
@@ -244,6 +249,16 @@ export const Header = () => {
                           >
                             <Settings className="h-4 w-4" />
                             Configurações
+                          </Button>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Button
+                            variant="ghost"
+                            className="justify-start gap-2"
+                            onClick={() => handleNavigate('/app/profile')}
+                          >
+                            <User className="h-4 w-4" />
+                            Meu Perfil
                           </Button>
                         </SheetClose>
                         <SheetClose asChild>

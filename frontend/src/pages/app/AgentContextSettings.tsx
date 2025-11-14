@@ -51,7 +51,17 @@ const AgentContextSettings = () => {
   const handleSave = async () => {
     try {
       setSaving(true)
-      await agentContextAPI.updateAgentContext(context)
+      // Saneia payload conforme validação do backend
+      const payload: Partial<AgentContext> = {
+        systemPrompt: (context.systemPrompt || '').slice(0, 2000),
+        personality: context.personality,
+        expertise: (context.expertise || [])
+          .map(e => e.trim())
+          .filter(e => e.length > 0)
+          .slice(0, 10),
+        customInstructions: (context.customInstructions || '').slice(0, 1000)
+      }
+      await agentContextAPI.updateAgentContext(payload)
       toast({
         title: 'Configurações salvas',
         description: 'As configurações do agente foram atualizadas com sucesso.'
@@ -60,7 +70,7 @@ const AgentContextSettings = () => {
       console.error('Erro ao salvar:', error)
       toast({
         title: 'Erro ao salvar',
-        description: 'Não foi possível salvar as configurações do agente.',
+        description: error instanceof Error ? error.message : 'Não foi possível salvar as configurações do agente.',
         variant: 'destructive'
       })
     } finally {
@@ -69,13 +79,25 @@ const AgentContextSettings = () => {
   }
 
   const addExpertise = () => {
-    if (newExpertise.trim() && !context.expertise.includes(newExpertise.trim())) {
-      setContext(prev => ({
-        ...prev,
-        expertise: [...prev.expertise, newExpertise.trim()]
-      }))
-      setNewExpertise('')
+    const value = newExpertise.trim()
+    if (!value) return
+    if (value.length > 50) {
+      toast({ title: 'Muito longo', description: 'Cada área deve ter no máximo 50 caracteres.', variant: 'destructive' })
+      return
     }
+    if (context.expertise.includes(value)) {
+      toast({ title: 'Já adicionado', description: 'Essa área já está na lista.' })
+      return
+    }
+    if (context.expertise.length >= 10) {
+      toast({ title: 'Limite atingido', description: 'Máximo de 10 áreas de especialização.', variant: 'destructive' })
+      return
+    }
+    setContext(prev => ({
+      ...prev,
+      expertise: [...prev.expertise, value]
+    }))
+    setNewExpertise('')
   }
 
   const removeExpertise = (expertise: string) => {

@@ -30,6 +30,7 @@ import GenerationError from './pages/app/GenerationError'
 import Oraculo from './pages/app/Oraculo'
 import AgentContextSettings from './pages/app/AgentContextSettings'
 import SystemDiagnostic from './pages/app/SystemDiagnostic'
+import Profile from './pages/app/Profile'
 
 const App = () => (
   <BrowserRouter>
@@ -64,6 +65,7 @@ const App = () => (
                   element={<CollectionView />}
                 />
                 <Route path="oraculo" element={<Oraculo />} />
+                <Route path="profile" element={<Profile />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="agent-context" element={<AgentContextSettings />} />
                 <Route path="diagnostic" element={<SystemDiagnostic />} />
